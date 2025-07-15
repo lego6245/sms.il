@@ -23,6 +23,14 @@ function sortByPoints(a: ILData, b: ILData) {
         : a.ilData.id - b.ilData.id
 }
 
+function sortByWorld(a: ILData, b: ILData) {
+    return a.ilData.world.localeCompare(b.ilData.world) != 0
+        ? a.ilData.world.localeCompare(b.ilData.world)
+        : a.ilData.episode - b.ilData.episode != 0
+        ? a.ilData.episode - b.ilData.episode
+        : a.ilData.id - b.ilData.id
+}
+
 function sortByRank(a: ILData, b: ILData) {
     return a.rank - b.rank != 0
         ? a.rank - b.rank
@@ -39,6 +47,7 @@ export default function PlayerPage(props: PlayerPageProps) {
     const levelData = playerIls.map(il => il.ilData).sort((a, b) => a.id - b.id);
     const [selectedSort, setSelectedSort] = React.useState("Points");
     const sortFunctions = new Map([
+        ["World", sortByWorld],
         ["Points", sortByPoints],
         ["Rank", sortByRank]
     ])
