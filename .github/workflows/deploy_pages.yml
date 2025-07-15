@@ -1,5 +1,4 @@
 name: Build & Deploy
-
 on:
     push:
         branches:
@@ -26,10 +25,14 @@ jobs:
               run: npm run test --if-present
             - name: Build
               run: npm run build --if-present
+              env:
+                NODE_OPTIONS: "--openssl-legacy-provider"
             - name: Export
               run: |
                 npm run export
                 touch out/.nojekyll
+              env:
+                NODE_OPTIONS: "--openssl-legacy-provider"
             - name: Deploy folder to pages
               uses: peaceiris/actions-gh-pages@v3
               with:
