@@ -50,8 +50,11 @@ function sortByWorld(a: ILData, b: ILData) {
         return worldA - worldB;
     }
     
-    if (a.ilData.episode !== b.ilData.episode) {
-        return a.ilData.episode - b.ilData.episode;
+    const episodeA = Number(a.ilData.episode) || 0;
+    const episodeB = Number(b.ilData.episode) || 0;
+    
+    if (episodeA !== episodeB) {
+        return episodeA - episodeB;
     }
     
     return a.ilData.id - b.ilData.id;
